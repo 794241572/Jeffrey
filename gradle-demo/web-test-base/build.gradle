@@ -1,0 +1,4 @@
+//base 所需要的依赖
+dependencies {
+    compile ("org.apache.commons:commons-lang3:$commonsVesion")
+}

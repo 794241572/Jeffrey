@@ -1,0 +1,13 @@
+apply plugin:'application'
+//声明spring-boot插件
+apply plugin: "spring-boot"
+//启动项
+mainClassName = "com.ryzhang.StartServer"
+
+//service项目所需依赖
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    //依赖子项目
+    compile project (":web-test-base")
+}
