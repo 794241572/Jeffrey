@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    uwintech.cn/service: 5a259ddfdd62b-emily-test
+  name: emily-test
+  namespace: default
+spec:
+  clusterIP:
+  ports:
+    - name: hh
+      port: 81
+      protocol: UDP
+      targetPort: 81
+  selector:
+    uwintech.cn/workload: 5a259ddfdd62b-emily-test
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
