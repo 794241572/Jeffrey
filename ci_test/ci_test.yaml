@@ -31,7 +31,6 @@ stages:
           - echo "age=$age"
           - echo $key
           - echo $secret
-          - echo $age
         image: alpine
         privileged: false
 variables:
