@@ -1,0 +1,81 @@
+name: developci
+kind: pipeline
+stages:
+  - name: first
+    parallel: false
+    steps:
+      - name: ablue
+        category: source
+        plugin: for割接
+        imagePullPolicy: if-not-present
+        version: 0.0.1
+        image: alpine
+        settings:
+          age: '26'
+          key:
+            secret: jeffreyzheng
+            secretKey: password
+          name: llia
+          addr: cici
+        privileged: false
+        mode: plugin
+  - name: second
+    parallel: false
+    steps:
+      - name: biu
+        category: custom
+        imagePullPolicy: if-not-present
+        commands:
+          - ls
+          - pwd
+          - echo "----"
+          - echo "color=$color"
+          - echo "age=$age"
+          - echo "=+++++++"
+          - echo $fav
+          - echo $date
+          - echo $age
+          - echo $color
+        image: alpine
+        privileged: false
+variables:
+  - name: color
+    type: string
+    required: true
+    description: 喜欢的颜色
+    value: reds
+  - name: age
+    type: int
+    required: true
+    value: '38'
+    description: ''
+  - name: date
+    type: secret
+    required: true
+    value: '{"secret":"jeffreyzheng","secretKey":"password"}'
+    description: eeefew
+  - name: fav
+    type: enum
+    required: true
+    enum_values:
+      - 中文和空格
+      - 》？》？~！@#￥%……&*（）————+
+      - yaml新增的
+      - 宁哥
+      - aaaaa
+    value: 中文和空格
+    description: 代理服务
+  - name: app_name
+    type: string
+    required: true
+    description: ''
+  - name: ENUM2
+    type: enum
+    required: false
+    enum_values:
+      - A
+      - B
+      - C
+      - D
+    value: 'B,C'
+    description: ''
