@@ -4,7 +4,7 @@ stages:
   - name: first
     parallel: false
     steps:
-      - name: ablue
+      - name: first
         category: source
         plugin: for割接
         imagePullPolicy: if-not-present
@@ -22,20 +22,18 @@ stages:
   - name: second
     parallel: false
     steps:
-      - name: biu
+      - name: second
         category: custom
         imagePullPolicy: if-not-present
         commands:
           - ls
           - pwd
-          - echo "----"
+          - echo $app_name
           - echo "color=$color"
           - echo "age=$age"
-          - echo "=+++++++"
           - echo $fav
           - echo $date
           - echo $age
-          - echo $color
         image: alpine
         privileged: false
 variables:
