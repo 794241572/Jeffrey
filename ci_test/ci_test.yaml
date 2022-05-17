@@ -26,13 +26,11 @@ stages:
         category: custom
         imagePullPolicy: if-not-present
         commands:
-          - ls
-          - pwd
           - echo $app_name
           - echo "color=$color"
           - echo "age=$age"
-          - echo $fav
-          - echo $date
+          - echo $key
+          - echo $secret
           - echo $age
         image: alpine
         privileged: false
@@ -52,28 +50,7 @@ variables:
     required: true
     value: '{"secret":"jeffreyzheng","secretKey":"password"}'
     description: eeefew
-  - name: fav
-    type: enum
-    required: true
-    enum_values:
-      - 中文和空格
-      - 》？》？~！@#￥%……&*（）————+
-      - yaml新增的
-      - 宁哥
-      - aaaaa
-    value: 中文和空格
-    description: 代理服务
   - name: app_name
     type: string
     required: true
-    description: ''
-  - name: ENUM2
-    type: enum
-    required: false
-    enum_values:
-      - A
-      - B
-      - C
-      - D
-    value: 'B,C'
     description: ''
