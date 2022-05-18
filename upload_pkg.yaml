@@ -1,0 +1,85 @@
+############### 上传制品 #################
+name: developci
+kind: pipeline
+stages:
+  - name: 拉代码
+    parallel: false
+    steps:
+      - name: '1'
+        category: source
+        plugin: git_clone
+        imagePullPolicy: if-not-present
+        version: 1.0.1
+        image: 'docker.easyops.local/ci/git_clone:1.0.1'
+        settings:
+          depth: '1'
+          recursive: 'true'
+          skip_verify: 'true'
+        privileged: false
+        mode: plugin
+  - name: 准备阶段
+    parallel: false
+    steps:
+      - name: '2'
+        category: build
+        plugin: maven-3.6.1-jdk-8
+        imagePullPolicy: if-not-present
+        version: 0.0.2
+        image: 'docker.easyops.local/ci/maven_plugin:1.0.6'
+        settings:
+          pom: pom.xml
+          goals: clean package
+          additional_parameters: '-Dmaven.test.failure.ignore=true'
+          output_artifact: null
+          tag_prefix: null
+          mirror_of: null
+          mirror_url: null
+        privileged: false
+        mode: plugin
+  - name: 调试阶段
+    parallel: false
+    steps:
+      - name: '3'
+        category: custom
+        imagePullPolicy: if-not-present
+        image: alpine
+        commands:
+          - echo '简单的调试一下'
+          - mkdir -p /data/easyops/target/.test
+          - echo '隐藏文件'> /data/easyops/target/.test/.1.txt
+          - echo '查看/data/easyops/target下的所有文件/目录'
+          - ls -al /data/easyops/target
+        privileged: false
+  - name: 上传制品阶段
+    parallel: false
+    steps:
+      - name: '4.1'
+        category: artifact
+        imagePullPolicy: if-not-present
+        plugin: upload_artifact
+        version: 4.3.0
+        image: 'docker.easyops.local/ci/upload_artifact:4.3.0'
+        settings:
+          artifact_file: /data/easyops/target/.test
+          version_name: '${{artifact_tag}}'
+          version_memo: '${{git_commit_message}}'
+          unzip: 'true'
+          packageId: eaf040e65d60440fb4ab7003c4efb0fc
+          strip_first: 'false'
+          env_type: '1'
+          api_gateway_ip: 172.30.0.90
+          openapi_accesskey: 8f38bdee3a306f51f9394863
+          openapi_secretkey: 516b63726e6856704b4845734e685767445a45426e466e4a6248417378575a4d
+          package_name: 上传制品包
+          package_id: eaf040e65d60440fb4ab7003c4efb0fc
+        privileged: false
+        mode: plugin
+      - name: '4.2'
+        category: custom
+        imagePullPolicy: if-not-present
+        image: alpine
+        commands:
+          - 'echo ${CI_USER_NAME}'
+        privileged: false
+variables: []
+############### 上传制品 #################
