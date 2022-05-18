@@ -1,4 +1,0 @@
-rootProject.name = 'gradle-demo'
-include 'web-test-service'
-include 'web-test-base'
-
