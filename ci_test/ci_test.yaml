@@ -30,7 +30,7 @@ stages:
           - echo "color=$color"
           - echo "age=$age"
           - echo $key
-          - echo $date
+          - echo $secret
         image: alpine
         privileged: false
 variables:
@@ -47,7 +47,7 @@ variables:
   - name: date
     type: secret
     required: true
-    value: '2020'
+    value: '{"secret":"jeffreyzheng","secretKey":"password"}'
     description: eeefew
   - name: app_name
     type: string
