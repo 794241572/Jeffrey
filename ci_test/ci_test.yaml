@@ -44,7 +44,7 @@ variables:
     required: true
     value: '38'
     description: ''
-  - name: date
+  - name: secret
     type: secret
     required: true
     value: '{"secret":"jeffreyzheng","secretKey":"password"}'
